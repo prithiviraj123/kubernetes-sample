@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: diyaskart-app
+  name: diyaskart-deploy
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels: 
+      app: diyaskart-app
+  template: 
+    metadata: 
+      labels: 
+        app: diyaskart-app
+    spec: 
+      containers: 
+        - 
+          args: 
+            - "-c"
+            - "/root/apache-tomcat-8.5.49/bin/startup.sh; while true; do sleep 1; done;"
+          command: 
+            - /bin/sh
+          image: prithiviraj123/diyaskart-img01
+          name: diyaskart-container
+          ports: 
+            - 
+              containerPort: 8080
+
